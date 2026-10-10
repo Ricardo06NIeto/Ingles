@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Academia de inglés: ruta a B2</title><style>
+:root{--bg:#f2f6f7;--ink:#12263a;--mut:#5b6b7a;--card:#fff;--line:#d5dee3;--acc:#0e7c86;--ok:#2f8f5b;--hi:#f2b84b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a24;--ink:#e6eef3;--mut:#93a4b3;--card:#17252f;--line:#2a3a47;--acc:#4cc3cd;--ok:#5cc58a;--hi:#e0a63a}}
+:root[data-theme="dark"]{--bg:#0f1a24;--ink:#e6eef3;--mut:#93a4b3;--card:#17252f;--line:#2a3a47;--acc:#4cc3cd;--ok:#5cc58a;--hi:#e0a63a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:2}
+nav{max-width:860px;margin:0 auto;display:flex;gap:4px;padding:8px 12px;overflow-x:auto;align-items:center}
+nav b{font-weight:800;margin-right:12px;white-space:nowrap}
+nav button{background:none;color:var(--ink);border:0;border-bottom:3px solid transparent;border-radius:0;padding:8px 12px;font-weight:600;white-space:nowrap}
+nav button.on{border-color:var(--acc);color:var(--acc)}
+main{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;line-height:1.1;margin:0 0 10px;letter-spacing:-.02em}
+h2{margin:0 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
+.card.done{border-left:5px solid var(--ok)}
+.mut{color:var(--mut)}
+button,input[type=text]{font:inherit}
+button{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer}
+button.alt{background:none;color:var(--ink);border:1px solid var(--line)}
+button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+input[type=text]{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.ex{background:var(--bg);border-left:4px solid var(--acc);padding:8px 12px;margin:8px 0;border-radius:4px}
+.q{margin:14px 0}.q p{margin:0 0 4px;font-weight:600}
+.o{display:flex;gap:8px;align-items:center;padding:4px 0}.o input{accent-color:var(--acc);width:18px;height:18px}
+.bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--acc)}
+details summary{cursor:pointer;font-weight:600;padding:2px 0}
+a.btn{display:inline-block;background:var(--ok);color:#fff;border-radius:8px;padding:10px 18px;text-decoration:none;font-weight:600}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;background:var(--bg);border:1px solid var(--line);font-size:.85rem}
+
+.o.right{background:color-mix(in srgb,var(--ok) 18%,transparent)}.o.wrong{background:color-mix(in srgb,#c0392b 18%,transparent)}
+.q.ok{border-left:5px solid var(--ok)}.q.bad{border-left:5px solid #c0392b}.exp{font-size:.9rem;color:var(--mut);margin:4px 0 0}
+textarea{width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+code.big{font-size:1.1rem;word-break:break-all;display:block;background:var(--bg);padding:10px;border-radius:6px;margin:8px 0}</style></head><body><header><nav id="nav"></nav></header><main id="app"></main><script>var L=[
+{t:"El verbo to be",r:"<b>I am</b>, <b>you / we / they are</b>, <b>he / she / it is</b>. Negativa: agrega <i>not</i>. Pregunta: invierte el orden.",e:["She is a teacher.","They are not at home.","Are you tired?"],k:"Contracciones: I'm, you're, she's, isn't, aren't."},
+{t:"Presente simple",r:"Se usa para hábitos y verdades. Con <b>he / she / it</b> el verbo lleva <b>-s</b>. Negativa: <i>don't / doesn't</i> + verbo base. Pregunta: <i>Do / Does</i> + sujeto + verbo base.",e:["She drinks coffee every morning.","I don't like fish.","Does he work on Saturdays?"],k:"Después de does / doesn't el verbo vuelve a la forma base (no -s)."},
+{t:"Artículos y plurales",r:"<b>a</b> antes de sonido consonante, <b>an</b> antes de sonido vocal, <b>the</b> para algo conocido o único. Plural: <i>-s</i>, <i>-es</i> (box, boxes) y algunos irregulares: child / children, man / men, person / people.",e:["I have an apple.","The sun is hot.","Two boxes, three children."],k:"Fíjate en el sonido, no en la letra: an hour, a university."},
+{t:"Presente continuo y there is / there are",r:"Acción que ocurre ahora: <b>am / is / are + verbo-ing</b>. Para decir que algo existe: <b>there is</b> + singular, <b>there are</b> + plural.",e:["The baby is sleeping.","They are playing football now.","There are three chairs in the room."],k:"Pregunta típica: What are you doing?"},
+{t:"Pasado simple",r:"Regulares: verbo + <b>-ed</b> (watched). Irregulares se memorizan: go / went, buy / bought, see / saw. Negativa: <i>didn't</i> + verbo base. Pregunta: <i>Did</i> + sujeto + verbo base. Pasado de to be: <b>was / were</b>.",e:["Yesterday I went to the market.","Did you see Tom?","We were happy last week."],k:"Con did, el verbo siempre en base: Did you go? (no Did you went)."},
+{t:"Futuro y modales",r:"<b>will</b> para predicciones y decisiones al momento. <b>be going to</b> para planes y evidencia. <b>can</b> habilidad, <b>must</b> obligación, <b>should</b> consejo. Después de un modal va el verbo base.",e:["Look at the clouds! It is going to rain.","You must stop at a red light.","You should see a doctor."],k:"Los modales no cambian con he / she / it: she can swim."},
+{t:"Comparativos, superlativos y preposiciones",r:"Corto: <b>big, bigger, the biggest</b>. Largo: <b>more interesting, the most interesting</b>. Irregulares: good, better, the best. Igualdad: <i>as ... as</i>. Tiempo: <b>in</b> + años y meses, <b>on</b> + días, <b>at</b> + horas.",e:["My house is bigger than yours.","This is the best movie I have seen.","The class starts at 8, on Monday, in 2026."],k:"Never: more bigger. Es bigger o more interesting, no ambas."}];var PQ=[
+["My name ___ Carlos.",["is","are","am"],0],["She ___ two brothers.",["have","has","haves"],1],["There ___ a cat in the garden.",["are","is","be"],1],["I ___ coffee every day.",["drink","drinks","am drink"],0],["___ you like pizza?",["Do","Does","Are"],0],["This is ___ umbrella.",["a","an","two"],1],
+["Yesterday we ___ to the beach.",["go","went","goed"],1],["She is ___ than her sister.",["taller","tallest","more tall"],0],["What ___ you doing now?",["do","are","did"],1],["You ___ wear a seat belt. It is the law.",["must","may","would"],0],["He ___ at 7 every morning.",["wakes up","wake up","waking up"],0],["We met ___ Monday.",["in","on","at"],1],
+["I ___ here since 2020.",["live","have lived","am living"],1],["If it rains, we ___ at home.",["stay","will stay","would stay"],1],["The house ___ in 1990.",["built","was built","has built"],1],["She asked me where ___.",["I lived","did I live","do I live"],0],
+["If I ___ more time, I would learn Italian.",["have","had","will have"],1],["He suggested ___ the meeting.",["to postpone","postponing","postpone"],1],["I wish I ___ taller.",["am","were","will be"],1],["If she had studied, she ___ the exam.",["would pass","would have passed","will pass"],1]];var Q=[
+["She ___ a teacher.",["is","are","am","be"],0,"He/she/it + is."],
+["I ___ from Panama.",["is","am","are","be"],1,"I + am."],
+["They ___ my friends.",["is","am","are","be"],2,"They/we/you + are."],
+["___ you tired?",["Is","Are","Am","Do"],1,"Pregunta con you: Are you...?"],
+["He ___ not at home.",["are","am","is","do"],2,"He + is not."],
+["She ___ coffee every morning.",["drink","drinks","drinking","is drink"],1,"Presente simple: he/she/it lleva -s."],
+["We ___ in a big house.",["lives","live","living","is live"],1,"We + verbo sin -s."],
+["___ he work on Saturdays?",["Do","Does","Is","Are"],1,"Pregunta con he/she/it: Does."],
+["I ___ like fish.",["doesn't","don't","not","am not"],1,"I + don't + verbo."],
+["My brother ___ play tennis.",["don't","isn't","doesn't","not"],2,"He/she/it + doesn't."],
+["I have ___ apple.",["a","an","the","some"],1,"An antes de sonido vocal."],
+["She is ___ engineer.",["a","an","the","–"],1,"Engineer empieza con sonido vocal: an."],
+["___ sun is hot today.",["A","An","The","–"],2,"Cosa única: the sun."],
+["Look! The baby ___.",["sleeps","is sleeping","sleep","sleeping"],1,"Acción ahora: is + verbo-ing."],
+["They ___ football now.",["play","plays","are playing","is playing"],2,"They + are + verbo-ing."],
+["What ___ you doing?",["do","are","is","does"],1,"Presente continuo: are you doing."],
+["There ___ a book on the table.",["are","is","be","have"],1,"Singular: there is."],
+["There ___ three chairs in the room.",["is","are","be","has"],1,"Plural: there are."],
+["___ is my sister. She is very kind.",["He","She","It","They"],1,"Mujer singular: she."],
+["This is Ana. I like ___.",["she","her","hers","his"],1,"Después del verbo: her."],
+["That is ___ car; we bought it last year.",["we","us","our","ours"],2,"Adjetivo posesivo: our + sustantivo."],
+["One child, two ___.",["childs","childrens","children","child"],2,"Plural irregular: children."],
+["One box, two ___.",["boxs","boxes","boxies","box"],1,"Termina en x: -es."],
+["Yesterday I ___ to the market.",["go","goes","went","gone"],2,"Pasado de go: went."],
+["She ___ TV last night.",["watch","watched","watches","watching"],1,"Pasado regular: -ed."],
+["___ you see Tom yesterday?",["Do","Did","Were","Are"],1,"Pregunta en pasado: Did."],
+["I ___ not eat breakfast this morning.",["did","do","was","am"],0,"Did not + verbo base."],
+["He ___ late for school yesterday.",["is","were","was","be"],2,"Pasado de to be con he: was."],
+["We ___ happy last week.",["was","were","are","be"],1,"Pasado de to be con we: were."],
+["They ___ a new car last month.",["buyed","bought","buy","buys"],1,"Pasado irregular: bought."],
+["Tomorrow I ___ visit my grandmother.",["going to","am going to","will to","am go to"],1,"Plan: am going to + verbo."],
+["Look at the clouds! It ___ rain.",["will","is going to","goes to","did"],1,"Evidencia ahora: is going to."],
+["I think she ___ pass the exam.",["will","is","did","going"],0,"Predicción u opinión: will."],
+["___ you swim?",["Do","Can","Are","Does"],1,"Habilidad: Can you...?"],
+["She ___ speak French very well.",["cans","can","is can","does can"],1,"Can no cambia con she."],
+["You ___ stop at a red light.",["can","must","may","would"],1,"Obligación: must."],
+["You look sick. You ___ see a doctor.",["should","can","did","are"],0,"Consejo: should."],
+["He ___ drive. He is only ten.",["can","can't","must","should"],1,"No puede: can't."],
+["My house is ___ than yours.",["big","bigger","biggest","more big"],1,"Adjetivo corto: -er than."],
+["This is the ___ movie I have ever seen.",["good","better","best","most good"],2,"Superlativo de good: the best."],
+["This book is ___ than that one.",["more interesting","interestinger","most interesting","interesting"],0,"Adjetivo largo: more + adjetivo."],
+["She is as tall ___ her brother.",["than","as","like","that"],1,"as ... as."],
+["I was born ___ 1999.",["on","at","in","to"],2,"Años: in."],
+["The class starts ___ 8 o'clock.",["in","on","at","to"],2,"Horas: at."],
+["My birthday is ___ Monday.",["in","at","on","to"],2,"Días: on."],
+["The keys are ___ the bag.",["in","on","at","of"],0,"Dentro de: in."],
+["How ___ water do you drink?",["many","much","few","lot"],1,"Incontable: how much."],
+["I have ___ friends in this city.",["much","a few","a little","any"],1,"Plural contable: a few."],
+["We don't have ___ milk.",["some","any","a","many"],1,"Negativa: any."],
+["___ do you live? In Panama.",["Who","Where","When","Why"],1,"Lugar: Where."]];function H(s){var a=5381,b=7;for(var i=0;i<s.length;i++){a=((a<<5)+a+s.charCodeAt(i))>>>0;b=((b<<4)^(b*31+s.charCodeAt(i)))>>>0}return (a.toString(36)+b.toString(36)).toUpperCase().slice(-8)}var SECRET="0ab1e46aae39af1a";
+var P={name:"",pl:null,done:{},rand:"",appr:false,best:null},view="inicio",open=-1;
+try{var s=localStorage.getItem("acad");if(s)P=Object.assign(P,JSON.parse(s))}catch(e){}
+if(!P.rand){P.rand=Math.random().toString(36).slice(2,8).toUpperCase()}
+function nDone(){var n=0;for(var k in P.done)if(P.done[k])n++;return n}
+function save(){try{localStorage.setItem("acad",JSON.stringify(P))}catch(e){}}
+function go(v){view=v;render()}
+function lvl(s){return s<8?"Empieza desde la Fase 1, lección 1.":s<13?"Haz la Fase 1 completa; ya conoces parte de la base.":s<17?"Tu nivel está cerca de B1. Pide al profesor pasar a la Fase 2.":"Buen nivel. Pide al profesor pasar a la Fase 3 (B2)."}
+function reqCode(){return btoa(unescape(encodeURIComponent(JSON.stringify({n:P.name||"Estudiante",d:nDone(),p:P.pl,r:P.rand}))))}
+function render(){var tabs=[["inicio","Inicio"],["lecciones","Lecciones"],["examen","Examen"]],n=document.getElementById("nav");n.innerHTML="<b>Academia B2</b>";
+tabs.forEach(function(t){var b=document.createElement("button");b.className=t[0]==view?"on":"";b.textContent=t[1];b.onclick=function(){go(t[0])};n.appendChild(b)});
+var a=document.getElementById("app");a.innerHTML=view=="inicio"?hInicio():view=="lecciones"?hLec():hEx();bind()}
+function hInicio(){var h='<h1>Ruta de inglés hacia B2</h1><p class="mut">Primero haces una prueba para saber tu punto de partida. Luego estudias las lecciones. Cuando las termines, tu profesor autoriza el examen.</p><div class="card"><h2>Prueba de nivel</h2>';
+if(P.pl!==null)h+='<p><b>'+P.pl+' / 20.</b> '+lvl(P.pl)+'</p><button class="alt" id="retest">Repetir la prueba</button>';
+else{h+='<p class="mut">20 preguntas, de fácil a difícil. Responde lo que sepas, sin buscar ayuda.</p><p><input type="text" id="nm" placeholder="Tu nombre" value="'+(P.name||"")+'" aria-label="Tu nombre"></p>';
+PQ.forEach(function(q,i){h+='<div class="q"><p>'+(i+1)+'. '+q[0]+'</p>';q[1].forEach(function(o,j){h+='<label class="o"><input type="radio" name="p'+i+'" value="'+j+'"> '+o+'</label>'});h+='</div>'});h+='<button id="sendpl">Terminar prueba</button>'}
+var d=nDone();return h+'</div><div class="card"><h2>Tu avance</h2><div class="bar"><i style="width:'+Math.round(d/L.length*100)+'%"></i></div><p>'+d+' de '+L.length+' lecciones completadas.</p></div>'}
+function hLec(){var h='<h1>Lecciones: Fase 1</h1><p class="mut">Lee cada lección, repite los ejemplos en voz alta e inventa tres frases propias. Luego márcala como completada.</p>';
+L.forEach(function(l,i){var dn=P.done[i];h+='<div class="card'+(dn?' done':'')+'"><details'+(open==i?' open':'')+' data-i="'+i+'"><summary>Lección '+(i+1)+': '+l.t+(dn?' <span class="tag">completada</span>':'')+'</summary><p>'+l.r+'</p>';
+l.e.forEach(function(x){h+='<div class="ex">'+x+'</div>'});h+='<p class="mut">Ojo: '+l.k+'</p><label class="o"><input type="checkbox" data-d="'+i+'"'+(dn?' checked':'')+'> Entendí esta lección y practiqué con mis propias frases</label></details></div>'});return h}
+function hEx(){var h='<h1>Examen 1: Gramática base</h1>';
+if(nDone()<L.length)return h+'<div class="card"><p>Completa las 7 lecciones para solicitarlo. Llevas <b>'+nDone()+' / 7</b>.</p></div>';
+if(!P.appr)return h+'<div class="card"><p><b>Lecciones completas.</b> Envía este código a tu profesor y espera su código de aprobación.</p><code class="big" id="rc">'+reqCode()+'</code><p><button class="alt" id="cp">Copiar código</button></p><p>Código de aprobación:</p><p><input type="text" id="ac" placeholder="Código del profesor" aria-label="Código de aprobación"> <button id="av">Desbloquear</button></p><p id="msg" class="mut"></p></div>';
+h+='<p class="mut">50 preguntas. Tiempo sugerido: 40 minutos. Con 40 aciertos o más pasas a la Fase 2.'+(P.best!==null?' Tu mejor nota: <b>'+P.best+' / 50</b>.':'')+'</p><div id="res" class="card" hidden></div>';
+Q.forEach(function(q,i){h+='<div class="q card" id="q'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p>';q[1].forEach(function(o,j){h+='<label class="o"><input type="radio" name="r'+i+'" value="'+j+'"> '+o+'</label>'});h+='<div class="exp" hidden></div></div>'});
+return h+'<p><button id="go">Corregir examen</button></p>'}
+function grade(){var ok=0;Q.forEach(function(q,i){var d=document.getElementById("q"+i),x=document.querySelector('input[name="r'+i+'"]:checked'),v=x?+x.value:-1;
+d.querySelectorAll(".o").forEach(function(l,j){l.querySelector("input").disabled=true;if(j==q[2])l.classList.add("right");else if(j==v)l.classList.add("wrong")});
+if(v==q[2]){ok++;d.classList.add("ok")}else{d.classList.add("bad");var e=d.querySelector(".exp");e.hidden=false;e.textContent="Regla: "+q[3]}});
+if(P.best===null||ok>P.best)P.best=ok;save();var r=document.getElementById("res");r.hidden=false;
+r.innerHTML="<b>"+ok+" / 50.</b> "+(ok>=40?"Listo para la Fase 2.":ok>=30?"Casi. Repasa las reglas de tus errores.":"Repasa la Fase 1 y vuelve a intentarlo.")+" Anota cada error en tu libreta: pregunta, tu respuesta, regla.";scrollTo({top:0,behavior:"smooth"})}
+function bind(){var g=function(i){return document.getElementById(i)};
+if(g("sendpl"))g("sendpl").onclick=function(){var sc=0,un=0;PQ.forEach(function(q,i){var x=document.querySelector('input[name="p'+i+'"]:checked');if(!x)un++;else if(+x.value==q[2])sc++});
+if(un&&!confirm("Dejaste "+un+" sin responder. ¿Terminar igual?"))return;P.pl=sc;P.name=g("nm").value.trim();save();render()};
+if(g("retest"))g("retest").onclick=function(){P.pl=null;save();render()};
+if(g("cp"))g("cp").onclick=function(){try{navigator.clipboard.writeText(g("rc").textContent);g("cp").textContent="Copiado"}catch(e){}};
+if(g("av"))g("av").onclick=function(){if(g("ac").value.trim().toUpperCase()==H(P.rand+SECRET)){P.appr=true;save();render()}else g("msg").textContent="Ese código no coincide. Revisa que lo copiaste completo."};
+if(g("go"))g("go").onclick=function(){var un=Q.filter(function(q,i){return !document.querySelector('input[name="r'+i+'"]:checked')}).length;if(un&&!confirm("Faltan "+un+" sin responder. ¿Corregir igual?"))return;g("go").disabled=true;grade()};
+document.querySelectorAll("[data-d]").forEach(function(c){c.onchange=function(){P.done[c.getAttribute("data-d")]=c.checked?1:0;open=+c.getAttribute("data-d");save();render()}});
+document.querySelectorAll("details[data-i]").forEach(function(d){d.ontoggle=function(){if(d.open)open=+d.getAttribute("data-i")}})}
+save();render();
+</script></body></html>
