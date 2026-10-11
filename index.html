@@ -167,9 +167,12 @@ document.querySelectorAll("[data-s]").forEach(function(b){b.onclick=function(){t
 document.querySelectorAll("details[data-i]").forEach(function(d){d.ontoggle=function(){if(d.open)open=+d.getAttribute("data-i")}})}
 
 function esc(t){return String(t==null?"":t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+var newMsg="";
+function setM(t){newMsg=t;var e=document.getElementById("cm");if(e)e.textContent=t}
+function hNew(){return '<div class="card"><h2>Crear cuenta de estudiante</h2><p><input type="text" id="cn" placeholder="Nombre completo" aria-label="Nombre completo"></p><p><input type="text" id="ce" placeholder="Correo (puede ser inventado, ej. jopi@rn.edu)" aria-label="Correo del estudiante"></p><p><input type="text" id="cp" placeholder="Contraseña (mínimo 6 caracteres)" aria-label="Contraseña del estudiante"></p><p><button id="cc">Crear cuenta</button></p><p class="mm" id="cm">'+esc(newMsg)+'</p></div>'}
 function blank(){return{name:"",pl:null,done:{},best:null,tries:0,approved:{}}}
-function hLogin(){return '<h1>Academia de inglés</h1><p class="mut">Entra con tu cuenta para guardar tu avance y verlo desde cualquier dispositivo.</p><div class="card"><h2>Entrar o crear cuenta</h2><p><input type="text" id="rn" placeholder="Tu nombre (solo al crear cuenta)" aria-label="Nombre"></p><p><input type="text" id="em" placeholder="Correo" autocomplete="email" aria-label="Correo"></p><p><input type="password" id="pw" placeholder="Contraseña (mínimo 6 caracteres)" autocomplete="current-password" aria-label="Contraseña"></p><p><button id="lg">Entrar</button> <button class="alt" id="rg">Crear cuenta</button></p><p class="mm" id="am"></p></div>'}
-function hProf(){var h='<h1>Panel del profesor</h1>',S=ALL.filter(function(x){return (x.email||"").toLowerCase()!=(U.email||"").toLowerCase()});
+function hLogin(){return '<h1>Academia de inglés</h1><p class="mut">Entra con tu cuenta para guardar tu avance y verlo desde cualquier dispositivo.</p><div class="card"><h2>Entrar</h2><p><input type="text" id="em" placeholder="Correo" autocomplete="email" aria-label="Correo"></p><p><input type="password" id="pw" placeholder="Contraseña (mínimo 6 caracteres)" autocomplete="current-password" aria-label="Contraseña"></p><p><button id="lg">Entrar</button></p><p class="mm" id="am"></p></div>'}
+function hProf(){var h='<h1>Panel del profesor</h1>'+hNew(),S=ALL.filter(function(x){return (x.email||"").toLowerCase()!=(U.email||"").toLowerCase()});
 if(!S.length)return h+'<div class="card"><p class="mut">Aún no hay estudiantes registrados.</p></div>';
 S.sort(function(a,b){return String(a.name).localeCompare(String(b.name))});
 S.forEach(function(x){var d=0,k;for(k in x.done||{})if(x.done[k])d++;var ap=x.approved&&x.approved.e1;
@@ -178,6 +181,11 @@ var AMSG={"auth/invalid-credential":"Correo o contraseña incorrectos.","auth/wr
 function bindAuth(){var g=function(i){return document.getElementById(i)},err=function(e){g("am").textContent=AMSG[e.code]||"No se pudo completar ("+(e.code||"error")+")."};
 if(g("lg"))g("lg").onclick=function(){g("am").textContent="";signInWithEmailAndPassword(auth,g("em").value.trim(),g("pw").value).catch(err)};
 if(g("rg"))g("rg").onclick=function(){var nm=g("rn").value.trim();if(!nm){g("am").textContent="Escribe tu nombre para crear la cuenta.";return}pendingName=nm;g("am").textContent="";createUserWithEmailAndPassword(auth,g("em").value.trim(),g("pw").value).catch(err)};
+if(g("cc"))g("cc").onclick=function(){var nm=g("cn").value.trim(),em=g("ce").value.trim(),pw=g("cp").value;
+if(!nm||!em||pw.length<6){setM("Completa el nombre, el correo y una contraseña de al menos 6 caracteres.");return}
+setM("Creando…");g("cc").disabled=true;
+var app2=initializeApp(FB,"sec"+Date.now()),a2=getAuth(app2),f2=getFirestore(app2);
+createUserWithEmailAndPassword(a2,em,pw).then(function(c){return setDoc(doc(f2,"students",c.user.uid),{name:nm,email:em,pl:null,done:{},best:null,tries:0,approved:{},updatedAt:Date.now()}).then(function(){return signOut(a2)})}).then(function(){setM("Cuenta creada. Correo: "+em+" / Contraseña: "+pw+". Anótalas y entrégaselas al estudiante.");var x=g("cn");if(x){x.value="";g("ce").value="";g("cp").value=""}}).catch(function(e){setM(AMSG[e.code]||"No se pudo crear la cuenta ("+(e.code||"error")+").")}).then(function(){var b=g("cc");if(b)b.disabled=false})};
 document.querySelectorAll("[data-ap]").forEach(function(b){b.onclick=function(){updateDoc(doc(fs,"students",b.getAttribute("data-ap")),{"approved.e1":b.getAttribute("data-v")=="1"}).catch(function(){alert("No se pudo guardar. Revisa las reglas de Firestore.")})}})}
 var app=initializeApp(FB),auth=getAuth(app),fs=getFirestore(app),U=null,ref=null,unsub=null,unsubAll=null,ALL=[],isT=false,ready=false,pendingName="";
 onAuthStateChanged(auth,function(u){ready=true;U=u;if(unsub){unsub();unsub=null}if(unsubAll){unsubAll();unsubAll=null}
