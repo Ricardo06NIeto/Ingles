@@ -16,11 +16,11 @@ h2{margin:0 0 8px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
 .card.done{border-left:5px solid var(--ok)}
 .mut{color:var(--mut)}
-button,input[type=text]{font:inherit}
+button,input[type=text],input[type=password]{font:inherit}
 button{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer}
 button.alt{background:none;color:var(--ink);border:1px solid var(--line)}
 button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
-input[type=text]{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+input[type=text],input[type=password]{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
 .ex{background:var(--bg);border-left:4px solid var(--acc);padding:8px 12px;margin:8px 0;border-radius:4px}
 .q{margin:14px 0}.q p{margin:0 0 4px;font-weight:600}
 .o{display:flex;gap:8px;align-items:center;padding:4px 0}.o input{accent-color:var(--acc);width:18px;height:18px}
@@ -32,7 +32,16 @@ a.btn{display:inline-block;background:var(--ok);color:#fff;border-radius:8px;pad
 .o.right{background:color-mix(in srgb,var(--ok) 18%,transparent)}.o.wrong{background:color-mix(in srgb,#c0392b 18%,transparent)}
 .q.ok{border-left:5px solid var(--ok)}.q.bad{border-left:5px solid #c0392b}.exp{font-size:.9rem;color:var(--mut);margin:4px 0 0}
 textarea{width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
-code.big{font-size:1.1rem;word-break:break-all;display:block;background:var(--bg);padding:10px;border-radius:6px;margin:8px 0}</style></head><body><header><nav id="nav"></nav></header><main id="app"></main><script>var L=[
+code.big{font-size:1.1rem;word-break:break-all;display:block;background:var(--bg);padding:10px;border-radius:6px;margin:8px 0}
+.tm{position:sticky;top:52px;z-index:1;background:var(--card);border:2px solid var(--acc);border-radius:8px;padding:8px 14px;font-weight:800;font-size:1.2rem;margin:0 0 12px;display:flex;justify-content:space-between}
+.tm.low{border-color:#c0392b;color:#c0392b}
+button.sp{padding:2px 8px;margin-left:8px;font-size:.9rem}
+.mm{font-weight:600;margin:6px 0}</style></head><body><header><nav id="nav"></nav></header><main id="app"></main><script type="module">
+import {FB,TEACHER_EMAIL} from "./firebase-config.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,updateDoc,onSnapshot,collection} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+var L=[
 {t:"El verbo to be",r:"<b>I am</b>, <b>you / we / they are</b>, <b>he / she / it is</b>. Negativa: agrega <i>not</i>. Pregunta: invierte el orden.",e:["She is a teacher.","They are not at home.","Are you tired?"],k:"Contracciones: I'm, you're, she's, isn't, aren't."},
 {t:"Presente simple",r:"Se usa para hábitos y verdades. Con <b>he / she / it</b> el verbo lleva <b>-s</b>. Negativa: <i>don't / doesn't</i> + verbo base. Pregunta: <i>Do / Does</i> + sujeto + verbo base.",e:["She drinks coffee every morning.","I don't like fish.","Does he work on Saturdays?"],k:"Después de does / doesn't el verbo vuelve a la forma base (no -s)."},
 {t:"Artículos y plurales",r:"<b>a</b> antes de sonido consonante, <b>an</b> antes de sonido vocal, <b>the</b> para algo conocido o único. Plural: <i>-s</i>, <i>-es</i> (box, boxes) y algunos irregulares: child / children, man / men, person / people.",e:["I have an apple.","The sun is hot.","Two boxes, three children."],k:"Fíjate en el sonido, no en la letra: an hour, a university."},
@@ -93,45 +102,89 @@ code.big{font-size:1.1rem;word-break:break-all;display:block;background:var(--bg
 ["How ___ water do you drink?",["many","much","few","lot"],1,"Incontable: how much."],
 ["I have ___ friends in this city.",["much","a few","a little","any"],1,"Plural contable: a few."],
 ["We don't have ___ milk.",["some","any","a","many"],1,"Negativa: any."],
-["___ do you live? In Panama.",["Who","Where","When","Why"],1,"Lugar: Where."]];function H(s){var a=5381,b=7;for(var i=0;i<s.length;i++){a=((a<<5)+a+s.charCodeAt(i))>>>0;b=((b<<4)^(b*31+s.charCodeAt(i)))>>>0}return (a.toString(36)+b.toString(36)).toUpperCase().slice(-8)}var SECRET="0ab1e46aae39af1a";
-var P={name:"",pl:null,done:{},rand:"",appr:false,best:null},view="inicio",open=-1;
-try{var s=localStorage.getItem("acad");if(s)P=Object.assign(P,JSON.parse(s))}catch(e){}
-if(!P.rand){P.rand=Math.random().toString(36).slice(2,8).toUpperCase()}
+["___ do you live? In Panama.",["Who","Where","When","Why"],1,"Lugar: Where."]];
+var MQ=[
+[["He ___ a student.",["is","are","am"],0],["We ___ not tired.",["is","am","are"],2],["___ they your friends?",["Is","Are","Am"],1]],
+[["She ___ to school by bus.",["go","goes","going"],1],["He ___ like coffee.",["don't","doesn't","isn't"],1],["___ you play football?",["Do","Does","Are"],0]],
+[["I have ___ orange.",["a","an","the"],1],["Two ___ are on the table.",["box","boxs","boxes"],2],["Three ___ are in the park.",["childs","children","child"],1]],
+[["She ___ reading now.",["is","are","do"],0],["There ___ two cats.",["is","are","be"],1],["They ___ playing outside.",["is","am","are"],2]],
+[["Yesterday I ___ pizza.",["eat","ate","eated"],1],["___ she call you?",["Do","Did","Does"],1],["We ___ at home last night.",["was","were","are"],1]],
+[["It is cloudy. It ___ rain.",["is going to","will to","goes to"],0],["You ___ wear a helmet. It is the law.",["must","can","would"],0],["You look tired. You ___ rest.",["should","did","are"],0]],
+[["My bag is ___ than yours.",["heavy","heavier","heaviest"],1],["She is the ___ student in class.",["good","better","best"],2],["The class starts ___ 9 o'clock.",["in","on","at"],2]]];
+var P={name:"",pl:null,done:{},rand:"",appr:false,best:null,tries:0},view="inicio",open=-1,plOn=false,exOn=false,iv=null;
 function nDone(){var n=0;for(var k in P.done)if(P.done[k])n++;return n}
-function save(){try{localStorage.setItem("acad",JSON.stringify(P))}catch(e){}}
-function go(v){view=v;render()}
+function save(){if(!U||!ref)return;updateDoc(ref,{name:P.name,pl:P.pl,done:P.done,best:P.best,tries:P.tries,updatedAt:Date.now()}).catch(function(){})}
+function stopT(){if(iv){clearInterval(iv);iv=null}}
+function startT(min,end){stopT();var t=Date.now()+min*60000;function tick(){var e=document.getElementById("tmv"),r=Math.max(0,Math.round((t-Date.now())/1000));
+if(e){e.textContent=String(Math.floor(r/60)).padStart(2,"0")+":"+String(r%60).padStart(2,"0");e.parentNode.className="tm"+(r<300?" low":"")}
+if(r<=0){stopT();end()}}tick();iv=setInterval(tick,500)}
+function tmBar(min){return '<div class="tm" role="timer"><span>Tiempo restante</span><span id="tmv">'+min+':00</span></div>'}
+function go(v){stopT();plOn=false;exOn=false;view=v;render()}
 function lvl(s){return s<8?"Empieza desde la Fase 1, lección 1.":s<13?"Haz la Fase 1 completa; ya conoces parte de la base.":s<17?"Tu nivel está cerca de B1. Pide al profesor pasar a la Fase 2.":"Buen nivel. Pide al profesor pasar a la Fase 3 (B2)."}
 function reqCode(){return btoa(unescape(encodeURIComponent(JSON.stringify({n:P.name||"Estudiante",d:nDone(),p:P.pl,r:P.rand}))))}
-function render(){var tabs=[["inicio","Inicio"],["lecciones","Lecciones"],["examen","Examen"]],n=document.getElementById("nav");n.innerHTML="<b>Academia B2</b>";
+function qhtml(arr,pre){var h="";arr.forEach(function(q,i){h+='<div class="q" id="'+pre+'q'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p>';q[1].forEach(function(o,j){h+='<label class="o"><input type="radio" name="'+pre+i+'" value="'+j+'"> '+o+'</label>'});h+='<div class="exp" hidden></div></div>'});return h}
+function count(arr,pre){var ok=0,un=0;arr.forEach(function(q,i){var x=document.querySelector('input[name="'+pre+i+'"]:checked');if(!x)un++;else if(+x.value==q[2])ok++});return[ok,un]}
+function render(){var n=document.getElementById("nav"),a=document.getElementById("app");
+if(!ready){a.innerHTML='<p class="mut">Cargando…</p>';return}
+n.innerHTML="<b>Academia B2</b>";
+if(!U){a.innerHTML=hLogin();bind();bindAuth();return}
+var tabs=[["inicio","Inicio"],["lecciones","Lecciones"],["examen","Examen"]];if(isT)tabs.push(["prof","Profesor"]);
 tabs.forEach(function(t){var b=document.createElement("button");b.className=t[0]==view?"on":"";b.textContent=t[1];b.onclick=function(){go(t[0])};n.appendChild(b)});
-var a=document.getElementById("app");a.innerHTML=view=="inicio"?hInicio():view=="lecciones"?hLec():hEx();bind()}
+var so=document.createElement("button");so.className="alt";so.textContent="Salir";so.style.marginLeft="auto";so.onclick=function(){stopT();plOn=false;exOn=false;view="inicio";signOut(auth)};n.appendChild(so);
+a.innerHTML=view=="inicio"?hInicio():view=="lecciones"?hLec():view=="prof"?hProf():hEx();bind();bindAuth()}
 function hInicio(){var h='<h1>Ruta de inglés hacia B2</h1><p class="mut">Primero haces una prueba para saber tu punto de partida. Luego estudias las lecciones. Cuando las termines, tu profesor autoriza el examen.</p><div class="card"><h2>Prueba de nivel</h2>';
 if(P.pl!==null)h+='<p><b>'+P.pl+' / 20.</b> '+lvl(P.pl)+'</p><button class="alt" id="retest">Repetir la prueba</button>';
-else{h+='<p class="mut">20 preguntas, de fácil a difícil. Responde lo que sepas, sin buscar ayuda.</p><p><input type="text" id="nm" placeholder="Tu nombre" value="'+(P.name||"")+'" aria-label="Tu nombre"></p>';
-PQ.forEach(function(q,i){h+='<div class="q"><p>'+(i+1)+'. '+q[0]+'</p>';q[1].forEach(function(o,j){h+='<label class="o"><input type="radio" name="p'+i+'" value="'+j+'"> '+o+'</label>'});h+='</div>'});h+='<button id="sendpl">Terminar prueba</button>'}
+else if(!plOn)h+='<p class="mut">20 preguntas, de fácil a difícil, con <b>15 minutos</b>. Responde lo que sepas, sin buscar ayuda.</p><p><input type="text" id="nm" placeholder="Tu nombre" value="'+esc(P.name||"")+'" aria-label="Tu nombre"></p><button id="stpl">Empezar prueba</button>';
+else h+=tmBar(15)+qhtml(PQ,"p")+'<button id="sendpl">Terminar prueba</button>';
 var d=nDone();return h+'</div><div class="card"><h2>Tu avance</h2><div class="bar"><i style="width:'+Math.round(d/L.length*100)+'%"></i></div><p>'+d+' de '+L.length+' lecciones completadas.</p></div>'}
-function hLec(){var h='<h1>Lecciones: Fase 1</h1><p class="mut">Lee cada lección, repite los ejemplos en voz alta e inventa tres frases propias. Luego márcala como completada.</p>';
+function hLec(){var h='<h1>Lecciones: Fase 1</h1><p class="mut">Lee la lección, toca 🔊 para escuchar los ejemplos y repítelos en voz alta. Para completarla, acierta 2 de 3 en el mini-ejercicio.</p>';
 L.forEach(function(l,i){var dn=P.done[i];h+='<div class="card'+(dn?' done':'')+'"><details'+(open==i?' open':'')+' data-i="'+i+'"><summary>Lección '+(i+1)+': '+l.t+(dn?' <span class="tag">completada</span>':'')+'</summary><p>'+l.r+'</p>';
-l.e.forEach(function(x){h+='<div class="ex">'+x+'</div>'});h+='<p class="mut">Ojo: '+l.k+'</p><label class="o"><input type="checkbox" data-d="'+i+'"'+(dn?' checked':'')+'> Entendí esta lección y practiqué con mis propias frases</label></details></div>'});return h}
+l.e.forEach(function(x){h+='<div class="ex">'+x+' <button class="alt sp" data-s="'+x+'" aria-label="Escuchar">🔊</button></div>'});
+h+='<p class="mut">Ojo: '+l.k+'</p>';
+if(dn)h+='<p><b>Lección completada.</b></p>';else h+='<h3>Mini-ejercicio</h3>'+qhtml(MQ[i],"m"+i+"_")+'<p><button data-m="'+i+'">Comprobar</button></p><p class="mm" id="mm'+i+'"></p>';
+h+='</details></div>'});return h}
 function hEx(){var h='<h1>Examen 1: Gramática base</h1>';
 if(nDone()<L.length)return h+'<div class="card"><p>Completa las 7 lecciones para solicitarlo. Llevas <b>'+nDone()+' / 7</b>.</p></div>';
-if(!P.appr)return h+'<div class="card"><p><b>Lecciones completas.</b> Envía este código a tu profesor y espera su código de aprobación.</p><code class="big" id="rc">'+reqCode()+'</code><p><button class="alt" id="cp">Copiar código</button></p><p>Código de aprobación:</p><p><input type="text" id="ac" placeholder="Código del profesor" aria-label="Código de aprobación"> <button id="av">Desbloquear</button></p><p id="msg" class="mut"></p></div>';
-h+='<p class="mut">50 preguntas. Tiempo sugerido: 40 minutos. Con 40 aciertos o más pasas a la Fase 2.'+(P.best!==null?' Tu mejor nota: <b>'+P.best+' / 50</b>.':'')+'</p><div id="res" class="card" hidden></div>';
-Q.forEach(function(q,i){h+='<div class="q card" id="q'+i+'"><p><b>'+(i+1)+'.</b> '+q[0]+'</p>';q[1].forEach(function(o,j){h+='<label class="o"><input type="radio" name="r'+i+'" value="'+j+'"> '+o+'</label>'});h+='<div class="exp" hidden></div></div>'});
-return h+'<p><button id="go">Corregir examen</button></p>'}
-function grade(){var ok=0;Q.forEach(function(q,i){var d=document.getElementById("q"+i),x=document.querySelector('input[name="r'+i+'"]:checked'),v=x?+x.value:-1;
+if(!(P.approved&&P.approved.e1))return h+'<div class="card"><p><b>Lecciones completas.</b> Tu profesor debe revisar tu avance y aprobar el examen. Esta página se actualiza sola cuando lo haga.</p></div>';
+if(!exOn)return h+'<div class="card"><p>50 preguntas con <b>40 minutos</b>. Al llegar a cero, el examen se corrige solo. Con 40 aciertos o más pasas a la Fase 2.</p>'+(P.best!==null?'<p>Tu mejor nota: <b>'+P.best+' / 50</b> en '+P.tries+' intento(s).</p>':'')+'<button id="stex">Empezar examen</button></div>';
+return h+tmBar(40)+'<div id="res" class="card" hidden></div>'+qhtml(Q,"r")+'<p><button id="go">Corregir examen</button></p>'}
+function grade(){stopT();var ok=0;Q.forEach(function(q,i){var d=document.getElementById("rq"+i),x=document.querySelector('input[name="r'+i+'"]:checked'),v=x?+x.value:-1;
 d.querySelectorAll(".o").forEach(function(l,j){l.querySelector("input").disabled=true;if(j==q[2])l.classList.add("right");else if(j==v)l.classList.add("wrong")});
 if(v==q[2]){ok++;d.classList.add("ok")}else{d.classList.add("bad");var e=d.querySelector(".exp");e.hidden=false;e.textContent="Regla: "+q[3]}});
-if(P.best===null||ok>P.best)P.best=ok;save();var r=document.getElementById("res");r.hidden=false;
-r.innerHTML="<b>"+ok+" / 50.</b> "+(ok>=40?"Listo para la Fase 2.":ok>=30?"Casi. Repasa las reglas de tus errores.":"Repasa la Fase 1 y vuelve a intentarlo.")+" Anota cada error en tu libreta: pregunta, tu respuesta, regla.";scrollTo({top:0,behavior:"smooth"})}
+P.tries++;if(P.best===null||ok>P.best)P.best=ok;save();var g=document.getElementById("go");if(g)g.disabled=true;var r=document.getElementById("res");r.hidden=false;
+r.innerHTML="<b>"+ok+" / 50.</b> "+(ok>=40?"Listo para la Fase 2.":ok>=30?"Casi. Repasa las reglas de tus errores.":"Repasa la Fase 1 y vuelve a intentarlo.")+" Anota cada error en tu libreta: pregunta, tu respuesta, regla. <p><button class=\"alt\" id=\"again\">Intentar de nuevo</button></p>";
+document.getElementById("again").onclick=function(){exOn=false;render()};scrollTo({top:0,behavior:"smooth"})}
+function finishPl(){stopT();var c=count(PQ,"p"),nm=document.getElementById("nm");P.pl=c[0];plOn=false;save();render()}
 function bind(){var g=function(i){return document.getElementById(i)};
-if(g("sendpl"))g("sendpl").onclick=function(){var sc=0,un=0;PQ.forEach(function(q,i){var x=document.querySelector('input[name="p'+i+'"]:checked');if(!x)un++;else if(+x.value==q[2])sc++});
-if(un&&!confirm("Dejaste "+un+" sin responder. ¿Terminar igual?"))return;P.pl=sc;P.name=g("nm").value.trim();save();render()};
+if(g("stpl"))g("stpl").onclick=function(){P.name=g("nm").value.trim();save();plOn=true;render();startT(15,function(){alert("Se acabó el tiempo. Se envía la prueba.");finishPl()})};
+if(g("sendpl"))g("sendpl").onclick=function(){var c=count(PQ,"p");if(c[1]&&!confirm("Dejaste "+c[1]+" sin responder. ¿Terminar igual?"))return;finishPl()};
 if(g("retest"))g("retest").onclick=function(){P.pl=null;save();render()};
-if(g("cp"))g("cp").onclick=function(){try{navigator.clipboard.writeText(g("rc").textContent);g("cp").textContent="Copiado"}catch(e){}};
-if(g("av"))g("av").onclick=function(){if(g("ac").value.trim().toUpperCase()==H(P.rand+SECRET)){P.appr=true;save();render()}else g("msg").textContent="Ese código no coincide. Revisa que lo copiaste completo."};
-if(g("go"))g("go").onclick=function(){var un=Q.filter(function(q,i){return !document.querySelector('input[name="r'+i+'"]:checked')}).length;if(un&&!confirm("Faltan "+un+" sin responder. ¿Corregir igual?"))return;g("go").disabled=true;grade()};
-document.querySelectorAll("[data-d]").forEach(function(c){c.onchange=function(){P.done[c.getAttribute("data-d")]=c.checked?1:0;open=+c.getAttribute("data-d");save();render()}});
+if(g("stex"))g("stex").onclick=function(){exOn=true;render();startT(40,function(){alert("Se acabó el tiempo. Se corrige el examen.");grade()})};
+if(g("go"))g("go").onclick=function(){var c=count(Q,"r");if(c[1]&&!confirm("Faltan "+c[1]+" sin responder. ¿Corregir igual?"))return;grade()};
+document.querySelectorAll("[data-m]").forEach(function(b){b.onclick=function(){var i=+b.getAttribute("data-m"),c=count(MQ[i],"m"+i+"_");open=i;
+if(c[0]>=2){P.done[i]=1;save();render()}else g("mm"+i).textContent="Acertaste "+c[0]+" de 3. Relee la lección e inténtalo otra vez."}});
+document.querySelectorAll("[data-s]").forEach(function(b){b.onclick=function(){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(b.getAttribute("data-s"));u.lang="en-US";u.rate=.85;speechSynthesis.speak(u)}catch(e){}}});
 document.querySelectorAll("details[data-i]").forEach(function(d){d.ontoggle=function(){if(d.open)open=+d.getAttribute("data-i")}})}
-save();render();
+
+function esc(t){return String(t==null?"":t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function blank(){return{name:"",pl:null,done:{},best:null,tries:0,approved:{}}}
+function hLogin(){return '<h1>Academia de inglés</h1><p class="mut">Entra con tu cuenta para guardar tu avance y verlo desde cualquier dispositivo.</p><div class="card"><h2>Entrar o crear cuenta</h2><p><input type="text" id="rn" placeholder="Tu nombre (solo al crear cuenta)" aria-label="Nombre"></p><p><input type="text" id="em" placeholder="Correo" autocomplete="email" aria-label="Correo"></p><p><input type="password" id="pw" placeholder="Contraseña (mínimo 6 caracteres)" autocomplete="current-password" aria-label="Contraseña"></p><p><button id="lg">Entrar</button> <button class="alt" id="rg">Crear cuenta</button></p><p class="mm" id="am"></p></div>'}
+function hProf(){var h='<h1>Panel del profesor</h1>',S=ALL.filter(function(x){return (x.email||"").toLowerCase()!=(U.email||"").toLowerCase()});
+if(!S.length)return h+'<div class="card"><p class="mut">Aún no hay estudiantes registrados.</p></div>';
+S.sort(function(a,b){return String(a.name).localeCompare(String(b.name))});
+S.forEach(function(x){var d=0,k;for(k in x.done||{})if(x.done[k])d++;var ap=x.approved&&x.approved.e1;
+h+='<div class="card"><h2>'+esc(x.name)+'</h2><p class="mut">'+esc(x.email)+'</p><p>Prueba de nivel: <b>'+(x.pl==null?"sin hacer":x.pl+" / 20")+'</b><br>Lecciones: <b>'+d+' / '+L.length+'</b><br>Examen 1: <b>'+(x.best==null?"sin intentos":x.best+" / 50 en "+x.tries+" intento(s)")+'</b></p><div class="bar"><i style="width:'+Math.round(d/L.length*100)+'%"></i></div><button data-ap="'+esc(x.uid)+'" data-v="'+(ap?0:1)+'">'+(ap?"Retirar aprobación del examen":"Aprobar examen")+'</button></div>'});return h}
+var AMSG={"auth/invalid-credential":"Correo o contraseña incorrectos.","auth/wrong-password":"Correo o contraseña incorrectos.","auth/user-not-found":"Correo o contraseña incorrectos.","auth/email-already-in-use":"Ese correo ya tiene cuenta. Pulsa Entrar.","auth/weak-password":"La contraseña debe tener al menos 6 caracteres.","auth/invalid-email":"El correo no es válido.","auth/too-many-requests":"Demasiados intentos. Espera unos minutos."};
+function bindAuth(){var g=function(i){return document.getElementById(i)},err=function(e){g("am").textContent=AMSG[e.code]||"No se pudo completar ("+(e.code||"error")+")."};
+if(g("lg"))g("lg").onclick=function(){g("am").textContent="";signInWithEmailAndPassword(auth,g("em").value.trim(),g("pw").value).catch(err)};
+if(g("rg"))g("rg").onclick=function(){var nm=g("rn").value.trim();if(!nm){g("am").textContent="Escribe tu nombre para crear la cuenta.";return}pendingName=nm;g("am").textContent="";createUserWithEmailAndPassword(auth,g("em").value.trim(),g("pw").value).catch(err)};
+document.querySelectorAll("[data-ap]").forEach(function(b){b.onclick=function(){updateDoc(doc(fs,"students",b.getAttribute("data-ap")),{"approved.e1":b.getAttribute("data-v")=="1"}).catch(function(){alert("No se pudo guardar. Revisa las reglas de Firestore.")})}})}
+var app=initializeApp(FB),auth=getAuth(app),fs=getFirestore(app),U=null,ref=null,unsub=null,unsubAll=null,ALL=[],isT=false,ready=false,pendingName="";
+onAuthStateChanged(auth,function(u){ready=true;U=u;if(unsub){unsub();unsub=null}if(unsubAll){unsubAll();unsubAll=null}
+if(!u){ref=null;P=blank();ALL=[];isT=false;render();return}
+isT=(u.email||"").toLowerCase()==TEACHER_EMAIL.toLowerCase();ref=doc(fs,"students",u.uid);
+getDoc(ref).then(function(sn){if(!sn.exists())return setDoc(ref,{name:pendingName||(u.email||"").split("@")[0],email:u.email,pl:null,done:{},best:null,tries:0,approved:{},updatedAt:Date.now()})}).catch(function(){}).then(function(){
+unsub=onSnapshot(ref,function(sn){if(sn.exists())P=Object.assign(blank(),sn.data());if(!plOn&&!exOn)render()},function(){});
+if(isT)unsubAll=onSnapshot(collection(fs,"students"),function(q){ALL=q.docs.map(function(d){var x=d.data();x.uid=d.id;return x});if(view=="prof"&&!plOn&&!exOn)render()},function(){})});render()});
+render();
 </script></body></html>
