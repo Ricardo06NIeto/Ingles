@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Academia de inglés: ruta a B2</title><style>
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Academia de inglés: ruta a B2</title><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
 :root{--bg:#f2f6f7;--ink:#12263a;--mut:#5b6b7a;--card:#fff;--line:#d5dee3;--acc:#0e7c86;--ok:#2f8f5b;--hi:#f2b84b;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a24;--ink:#e6eef3;--mut:#93a4b3;--card:#17252f;--line:#2a3a47;--acc:#4cc3cd;--ok:#5cc58a;--hi:#e0a63a}}
@@ -50,7 +50,7 @@ button.sb{margin-right:6px}
 .tile{text-align:center;margin:0}.tn{font-size:1.6rem;font-weight:800}
 nav{overflow:visible!important;gap:8px}
 .tabs{display:flex;gap:4px;overflow-x:auto;flex:1;min-width:0}
-.menu{position:relative;flex:none}.menu summary{list-style:none;cursor:pointer;border-radius:50%;display:block}.menu summary::-webkit-details-marker{display:none}
+.menu{position:relative;flex:none}.menu summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;background:var(--acc);color:#fff;border-radius:12px;padding:8px 14px;font-weight:700}.menu summary::-webkit-details-marker{display:none}.hb{display:flex;flex-direction:column;gap:4px}.hb i{display:block;width:20px;height:3px;background:#fff;border-radius:2px}
 .dd{position:absolute;right:0;top:46px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px;min-width:190px;z-index:5}
 .dd button{text-align:left;border-bottom:1px solid var(--line)!important}
 .hero2{display:flex;gap:20px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 22%,var(--card)),var(--card));border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}
@@ -67,6 +67,27 @@ select{font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;b
 @keyframes wig{0%,100%{transform:rotate(0)}50%{transform:rotate(-7deg)}}
 @keyframes pant{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.18)}}
 @media (prefers-reduced-motion:reduce){.ear,.tongue{animation:none}}
+
+:root,:root:not([data-theme="light"]){--bg:#eaf6ff;--ink:#1b2a4a;--mut:#56658a;--card:#ffffff;--line:#cfe3f5;--acc:#2f6fed;--ok:#22b573;--hi:#ffb703;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#eaf6ff;--ink:#1b2a4a;--mut:#56658a;--card:#ffffff;--line:#cfe3f5;--acc:#2f6fed;--ok:#22b573;--hi:#ffb703}}
+body{font-family:"Fredoka","Segoe UI",system-ui,sans-serif;background:linear-gradient(180deg,#d6efff 0%,#f4fbff 45%,#fff7e6 100%) fixed}
+header{border-bottom:4px solid #ffb703}
+.card{border:2px solid var(--line);border-radius:18px;box-shadow:0 4px 0 rgba(47,111,237,.12)}
+button{border-radius:14px;box-shadow:0 4px 0 rgba(0,0,0,.16);font-weight:700}
+button:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.16)}
+button.alt{box-shadow:none}nav button,.dd button{box-shadow:none}
+h1,h2{color:#1b2a4a}
+.hero2{position:relative;background:linear-gradient(135deg,#ffd166,#ff8fab 55%,#a78bfa);border:3px solid #1b2a4a;box-shadow:0 6px 0 #1b2a4a}
+.hero2::after{content:"⚡ ⭐ 💥";position:absolute;top:8px;right:16px;font-size:1.5rem;letter-spacing:6px}
+.hero2 .mut{color:#3a2f5a}.hero2 h1{color:#1b2a4a}
+.bubble{border:3px solid #1b2a4a;border-radius:18px;color:#1b2a4a;font-size:1.05rem}
+button.big{background:linear-gradient(135deg,#2f6fed,#7c3aed);box-shadow:0 5px 0 #1d2f8f;font-size:1.25rem}
+.tl .ph:nth-child(1){border-top:6px solid #22b573}.tl .ph:nth-child(2){border-top:6px solid #ff8c42}.tl .ph:nth-child(3){border-top:6px solid #7c3aed}
+.ph.now{border-color:var(--acc)}.ph.lock{opacity:.7}
+.cape{transform-box:fill-box;transform-origin:50% 0;animation:fly 2.2s ease-in-out infinite}
+@keyframes fly{0%,100%{transform:skewX(-3deg)}50%{transform:skewX(3deg)}}
+@media (prefers-reduced-motion:reduce){.cape{animation:none}}
+.bar{background:#e3eefb}.bar i{background:linear-gradient(90deg,#22b573,#2f6fed)}
 </style></head><body><header><nav id="nav"></nav></header><main id="app"></main><script type="module">
 import {FB,TEACHER_EMAIL} from "./firebase-config.js";
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -146,7 +167,7 @@ function firstLeft(ph){for(var i=PH[ph].a;i<=PH[ph].b;i++)if(!P.done[i])return i
 function toA(b){return[b.s,b.o,b.a]}
 function pk(kind){var pool=kind=="sim"?BANK:BANK.filter(function(b){return b.t>=PH[P.phase].a&&b.t<=PH[P.phase].b});return shuf(pool).slice(0,kind=="sim"?50:30)}
 function lvl(s){return s<8?"Nivel estimado: principiante (A1). Empieza por la Fase 1.":s<13?"Nivel estimado: básico (A2). Conoces parte de la Fase 1, pero igual debes completarla.":"Nivel estimado: intermedio (B1). Buen punto de partida; igual debes completar todas las lecciones."}
-function dog(){return '<svg class="dog" viewBox="0 0 200 200" role="img" aria-label="Perrito mascota"><g class="ear l"><ellipse cx="52" cy="78" rx="24" ry="42" fill="#8b5a2b" transform="rotate(18 52 78)"/></g><g class="ear r"><ellipse cx="148" cy="78" rx="24" ry="42" fill="#8b5a2b" transform="rotate(-18 148 78)"/></g><ellipse cx="100" cy="192" rx="54" ry="32" fill="#e9b872"/><rect x="66" y="150" width="68" height="13" rx="6" fill="#d94f4f"/><circle cx="100" cy="172" r="8" fill="#f2c94c"/><ellipse cx="100" cy="100" rx="62" ry="58" fill="#e9b872"/><ellipse cx="100" cy="124" rx="34" ry="26" fill="#fbe3bd"/><circle cx="78" cy="92" r="9" fill="#222"/><circle cx="122" cy="92" r="9" fill="#222"/><circle cx="81" cy="89" r="3" fill="#fff"/><circle cx="125" cy="89" r="3" fill="#fff"/><ellipse cx="100" cy="108" rx="13" ry="9" fill="#2b2b2b"/><path d="M100 117 v8 M100 125 q-12 12 -22 2 M100 125 q12 12 22 2" stroke="#2b2b2b" stroke-width="3" fill="none" stroke-linecap="round"/><path class="tongue" d="M91 134 q9 24 18 0 z" fill="#ff7f93"/></svg>'}
+function dog(){return '<svg class="dog" viewBox="0 0 220 230" role="img" aria-label="Super Perro, la mascota"><g class="cape"><path d="M38 118 Q8 200 52 226 L168 226 Q212 200 182 118 Z" fill="#7c3aed"/><path d="M60 130 Q40 195 70 220 L150 220 Q180 195 160 130 Z" fill="#a78bfa"/></g><g class="ear l"><ellipse cx="56" cy="76" rx="24" ry="40" fill="#8b5a2b" transform="rotate(18 56 76)"/></g><g class="ear r"><ellipse cx="164" cy="76" rx="24" ry="40" fill="#8b5a2b" transform="rotate(-18 164 76)"/></g><ellipse cx="110" cy="198" rx="50" ry="34" fill="#2f6fed"/><polygon points="110,176 116,191 132,191 119,200 124,215 110,206 96,215 101,200 88,191 104,191" fill="#ffd166" stroke="#e9a100" stroke-width="2"/><ellipse cx="110" cy="102" rx="62" ry="58" fill="#e9b872"/><ellipse cx="110" cy="128" rx="34" ry="26" fill="#fbe3bd"/><path d="M42 84 L56 76 L164 76 L178 84 L168 112 L52 112 Z" fill="#e11d48"/><circle cx="86" cy="94" r="12" fill="#fff"/><circle cx="134" cy="94" r="12" fill="#fff"/><circle cx="88" cy="95" r="6" fill="#222"/><circle cx="136" cy="95" r="6" fill="#222"/><circle cx="90" cy="92" r="2" fill="#fff"/><circle cx="138" cy="92" r="2" fill="#fff"/><ellipse cx="110" cy="112" rx="13" ry="9" fill="#2b2b2b"/><path d="M110 121 v8 M110 129 q-12 12 -22 2 M110 129 q12 12 22 2" stroke="#2b2b2b" stroke-width="3" fill="none" stroke-linecap="round"/><path class="tongue" d="M101 138 q9 24 18 0 z" fill="#ff7f93"/></svg>'}
 function render(){var n=document.getElementById("nav"),a=document.getElementById("app");
 if(!ready){a.innerHTML='<p class="mut">Cargando…</p>';return}
 n.innerHTML="<b>Academia B2</b>";
@@ -154,14 +175,14 @@ if(!U){a.innerHTML=hLogin();bind();bindAuth();return}
 var tabs=[["inicio","Inicio"],["lecciones","Lecciones"],["examen","Examen"],["rec","Recursos"]];if(isT)tabs.push(["prof","Profesor"]);
 var tb=document.createElement("div");tb.className="tabs";
 tabs.forEach(function(t){var b=document.createElement("button");b.className=t[0]==view?"on":"";b.textContent=t[1];b.onclick=function(){go(t[0])};tb.appendChild(b)});n.appendChild(tb);
-var m=document.createElement("details");m.className="menu";m.innerHTML='<summary aria-label="Menú de usuario">'+avatar(P,36)+'</summary><div class="dd"><button class="alt" data-mn="scores">Mis puntuaciones</button><button class="alt" data-mn="errors">Mis errores</button><button class="alt" data-mn="out">Cerrar sesión</button></div>';n.appendChild(m);
-a.innerHTML=view=="inicio"?hInicio():view=="lecciones"?hLec():view=="prof"?hProf():view=="rec"?hRes():view=="scores"?hScores():view=="errors"?hErrors():hEx();bind();bindAuth()}
+var m=document.createElement("details");m.className="menu";m.innerHTML='<summary aria-label="Abrir menú"><span class="hb"><i></i><i></i><i></i></span><b>Menú</b></summary><div class="dd"><button class="alt" data-mn="perfil">👤 Perfil</button><button class="alt" data-mn="tablero">📊 Dashboard</button><button class="alt" data-mn="out">🚪 Cerrar sesión</button></div>';n.appendChild(m);
+a.innerHTML=view=="inicio"?hInicio():view=="lecciones"?hLec():view=="prof"?hProf():view=="rec"?hRes():view=="perfil"?hPerfil():view=="tablero"?hDashS():hEx();bind();bindAuth()}
 function hInicio(){var ph=P.phase,d=nd(P.done),n=L.length,days=Math.ceil((EXAM_DATE-new Date())/864e5),st=P.phs[ph]||{},rv=st.e&&st.e.length&&!st.r,txt,b,i,h;
 if(P.pl===null){txt="¡Guau! Primero una prueba inicial para conocer tu nivel.";b=plOn?'':'<button class="big" id="stpl">Empezar prueba inicial</button>'}
 else if(ph>=PH.length){txt="¡Guau guau! Terminaste las 3 fases. Ahora, el simulacro final.";b='<button class="big" data-cta="ex">Hacer el simulacro final</button>'}
 else if(left(ph)>0){var nx=firstLeft(ph);txt="Hoy toca la lección "+(nx+1)+": "+L[nx].t+". ¡Tú puedes!";b='<button class="big" data-cta="lec" data-i="'+nx+'">Continuar: lección '+(nx+1)+'</button>'}
 else{txt=rv?"Casi lo logras. Repasemos los temas que fallaste.":"¡Terminaste las lecciones! Es hora del examen de la fase.";b='<button class="big" data-cta="ex">'+(rv?"Ir al repaso":"Hacer el examen de la fase")+'</button>'}
-h='<div class="hero2"><div class="dogbox">'+dog()+'</div><div class="hmsg"><div class="bubble">'+txt+'</div><h1>Hola, '+esc(P.name||"")+'</h1><p class="mut">'+(P.age?esc(P.age)+" años. ":"")+(days>=0?"Faltan <b>"+days+" días</b> para el examen del 28 de octubre.":"")+'</p><p>'+b+'</p></div></div>';
+h='<div class="hero2"><div class="dogbox">'+dog()+'</div><div class="hmsg"><div class="bubble">'+txt+'</div><h1>¡Hola, '+esc(P.name||"")+'! 👋</h1><p class="mut">'+(P.age?esc(P.age)+" años. ":"")+(days>=0?"Faltan <b>"+days+" días</b> para el examen del 28 de octubre.":"")+'</p><p>'+b+'</p></div></div>';
 if(P.badges&&P.badges.length)h+='<p>'+bdg(P.badges)+'</p>';
 if(P.pl===null&&plOn)h+='<div class="card"><h2>Prueba inicial</h2><p class="mut">Solo sirve para estimar tu nivel. No cambia tu ruta.</p>'+tmBar(15)+qhtml(PQ,"p")+'<button id="sendpl">Terminar prueba</button></div>';
 h+='<div class="tiles">'+tile(d+" / "+n,"Lecciones")+tile(ph>=PH.length?"Final":"Fase "+(ph+1),"Fase actual")+tile(P.pl===null?"—":P.pl+" / 20","Prueba inicial")+tile(nd(P.pr)+" / "+TP,"Pronunciación")+'</div>';
@@ -192,6 +213,10 @@ return h+'<div class="card hero"><h2>Examen de la '+F.n+'</h2><p>30 preguntas, 3
 function hRepaso(ph){var st=P.phs[ph]||{},h='<h1>Repaso de la fase</h1><p class="mut">Estos son los temas donde fallaste. Lee el resumen, practica y luego podrás repetir el examen.</p>';
 (st.e||[]).forEach(function(t){h+='<div class="card"><h2>'+L[t].t+' <span class="tag">'+L[t].l+'</span></h2><p>'+L[t].r+'</p>';L[t].e.forEach(function(e){h+='<div class="ex">'+e+'</div>'});h+='<p class="mut">Ojo: '+L[t].k+'</p></div>'});
 return h+'<div id="rvres" class="card" hidden></div>'+qhtml(revList.map(toA),"v")+'<p><button id="rvgo">Comprobar repaso</button></p>'}
+function hPerfil(){var ph=P.phase,h='<h1>Mi perfil</h1><div class="card"><div class="who">'+avatar(P,96)+'<div><h2 style="margin:0">'+esc(P.name||"")+'</h2><p class="mut" style="margin:0">'+(P.age?esc(P.age)+" años":"Edad sin registrar")+'</p></div></div>';
+if(P.badges&&P.badges.length)h+='<p>'+bdg(P.badges)+'</p>';else h+='<p class="mut">Todavía no tienes insignias. Tu profesor las da por tu esfuerzo.</p>';
+h+='<p>Correo para entrar: <b>'+esc(U.email||"")+'</b><br>Correo de contacto: <b>'+esc(P.contact||"sin registrar")+'</b><br>Fase actual: <b>'+(ph>=PH.length?"Simulacro final":PH[ph].n)+'</b><br>Lecciones completadas: <b>'+nd(P.done)+' / '+L.length+'</b></p><p class="mut">Para cambiar tu foto, nombre o edad, pídeselo a tu profesor.</p></div>';return h}
+function hDashS(){return hScores().replace('<h1>Mis puntuaciones</h1>','<h1>Mi dashboard</h1>')+'<h2>Mis errores</h2>'+hErrors().replace(/<h1>.*?<\/h1>/,'')}
 function histHtml(a){var r=(a||[]).slice(-8).reverse().map(function(e){return new Date(e.d).toLocaleDateString()+": "+(e.k=="S"?"Simulacro":e.k?"Fase "+e.k.slice(1):"Examen")+" "+(e.k?e.s+"%":e.s*2+"/100")});return r.length?'<p>'+r.map(esc).join("<br>")+'</p>':'<p class="mut">Aún no hay intentos.</p>'}
 function hScores(){var d=nd(P.done),n=L.length,h='<h1>Mis puntuaciones</h1><div class="card"><h2>Lecciones</h2><div class="bar"><i style="width:'+Math.round(d/n*100)+'%"></i></div><p><b>'+d+' / '+n+'</b>'+(d==n?' ✅ Completaste el 100% de las lecciones.':' lecciones completadas.')+'</p></div><div class="card" style="overflow-x:auto"><h2>Exámenes por fase</h2><table><tr><th>Fase</th><th>Intentos</th><th>Mejor</th><th>Estado</th></tr>';
 PH.forEach(function(f,i){var s=P.phs[i]||{};h+='<tr><td>'+f.n+'</td><td>'+(s.t||0)+'</td><td>'+(s.b!=null?s.b+"%":"—")+'</td><td>'+(s.p?"✅ Aprobada":P.phase==i?"En curso":P.phase<i?"Bloqueada":"")+'</td></tr>'});
