@@ -1,4 +1,4 @@
-// Datos de conexión de tu proyecto de Firebase.
+// conexion
 export const FB = {
   apiKey: "AIzaSyDfN73uMbG1tMwcBOmY8Snd-s5jRc-qHks",
   authDomain: "academia-ingles-8191b.firebaseapp.com",
