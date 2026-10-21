@@ -6,8 +6,8 @@
   <title>Academia de inglés: ruta a B2</title>
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#2f6fed">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2230%22%20fill%3D%22%232f6fed%22%20stroke%3D%22%23ffb703%22%20stroke-width%3D%223%22%2F%3E%3Cellipse%20cx%3D%2214%22%20cy%3D%2226%22%20rx%3D%227%22%20ry%3D%2212%22%20fill%3D%22%238b5a2b%22%20transform%3D%22rotate%2818%2014%2026%29%22%2F%3E%3Cellipse%20cx%3D%2250%22%20cy%3D%2226%22%20rx%3D%227%22%20ry%3D%2212%22%20fill%3D%22%238b5a2b%22%20transform%3D%22rotate%28-18%2050%2026%29%22%2F%3E%3Cellipse%20cx%3D%2232%22%20cy%3D%2233%22%20rx%3D%2218%22%20ry%3D%2216%22%20fill%3D%22%23e9b872%22%2F%3E%3Cellipse%20cx%3D%2232%22%20cy%3D%2240%22%20rx%3D%2210%22%20ry%3D%227%22%20fill%3D%22%23fbe3bd%22%2F%3E%3Cpath%20d%3D%22M13%2026%20L17%2023%20L47%2023%20L51%2026%20L48%2034%20L16%2034%20Z%22%20fill%3D%22%23e11d48%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2229%22%20r%3D%223.6%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2240%22%20cy%3D%2229%22%20r%3D%223.6%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2224.6%22%20cy%3D%2229.4%22%20r%3D%221.8%22%20fill%3D%22%23222%22%2F%3E%3Ccircle%20cx%3D%2240.6%22%20cy%3D%2229.4%22%20r%3D%221.8%22%20fill%3D%22%23222%22%2F%3E%3Cellipse%20cx%3D%2232%22%20cy%3D%2237%22%20rx%3D%224%22%20ry%3D%222.8%22%20fill%3D%22%232b2b2b%22%2F%3E%3Cpolygon%20points%3D%2232%2C47%2033.6%2C51%2037.8%2C51%2034.4%2C53.5%2035.7%2C57.5%2032%2C55.2%2028.3%2C57.5%2029.6%2C53.5%2026.2%2C51%2030.4%2C51%22%20fill%3D%22%23ffd166%22%2F%3E%3C%2Fsvg%3E">
-  <link href="https://googleapis.com" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,...">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#f2f6f7;--ink:#12263a;--mut:#5b6b7a;--card:#fff;--line:#d5dee3;--acc:#0e7c86;--ok:#2f8f5b;--hi:#f2b84b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
     @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a24;--ink:#e6eef3;--mut:#93a4b3;--card:#17252f;--line:#2a3a47;--acc:#4cc3cd;--ok:#5cc58a;--hi:#e0a63a}}
@@ -34,9 +34,6 @@
     .q{margin:14px 0}.q p{margin:0 0 4px;font-weight:600}
     .o{display:flex;gap:8px;align-items:center;padding:4px 0}.o input{accent-color:var(--acc);width:18px;height:18px}
     .bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--acc)}
-    details summary{cursor:pointer;font-weight:600;padding:2px 0}
-    a.btn{display:inline-block;background:var(--ok);color:#fff;border-radius:8px;padding:10px 18px;text-decoration:none;font-weight:600}
-    .tag{display:inline-block;padding:2px 10px;border-radius:12px;background:var(--bg);border:1px solid var(--line);font-size:.85rem}
     .o.right{background:color-mix(in srgb,var(--ok) 18%,transparent)}.o.wrong{background:color-mix(in srgb,#c0392b 18%,transparent)}
     .q.ok{border-left:5px solid var(--ok)}.q.bad{border-left:5px solid #c0392b}.exp{font-size:.9rem;color:var(--mut);margin:4px 0 0}
     .tr{display:flex;justify-content:space-between;margin-top:8px;font-weight:600}
@@ -58,7 +55,6 @@
   </header>
 
   <main>
-    <!-- Contenedor del Test -->
     <div class="card" id="quiz-container">
       <div class="hero2">
         <div class="hmsg">
@@ -67,7 +63,6 @@
         </div>
       </div>
 
-      <!-- Barra de progreso -->
       <div class="bar">
         <i id="quiz-progress" style="width: 0%;"></i>
       </div>
@@ -76,30 +71,26 @@
         <span class="mut" id="quiz-score-text">Puntuación: 0%</span>
       </div>
 
-      <!-- Espacio dinámico de la pregunta -->
       <div id="question-box" class="q"></div>
 
-      <!-- Botón de acción -->
       <div style="margin-top: 18px; text-align: right;">
         <button id="quiz-action-btn" disabled onclick="handleNextStep()">Verificar</button>
       </div>
     </div>
   </main>
 
-  <!-- Módulos de Firebase y Lógica del Sistema -->
   <script type="module">
-    import { initializeApp } from "https://gstatic.com";
-    import { getFirestore, doc, updateDoc, arrayUnion, serverTimestamp } from "https://gstatic.com";
-    import { getAuth, onAuthStateChanged } from "https://gstatic.com";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, doc, updateDoc, arrayUnion, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    // CONFIGURACIÓN DE TU PROYECTO FIREBASE
     const firebaseConfig = {
-      apiKey: "TU_API_KEY_AQUÍ",
-      authDomain: "TU_PROJECT_://firebaseapp.com",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_PROJECT_://appspot.com",
-      messagingSenderId: "TU_SENDER_ID",
-      appId: "TU_APP_ID"
+      apiKey: "AIzaSyDFN73uMbG1tMwcBOmY8Snd-s5jRc-qHks",
+      authDomain: "academia-ingles-8191b.firebaseapp.com",
+      projectId: "academia-ingles-8191b",
+      storageBucket: "academia-ingles-8191b.firebasestorage.app",
+      messagingSenderId: "530937495063",
+      appId: "1:530937495063:web:79d0b01f089b1bd69be652"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -115,46 +106,162 @@
     let verbsLearned = [];
     let verbsFailed = [];
 
-    // Cuestionario de Verbos Universitarios
     const verbQuestions = [
       {
-        id: 1,
-        verb: "choose",
-        type: "irregular",
+        id: 1, verb: "choose", type: "irregular",
         sentence: "The researchers _________ an alternative theory based on the new data collected last semester.",
-        options: ["choosed", "chosen", "chose", "choose"],
-        correct: "chose",
+        options: ["choosed", "chosen", "chose", "choose"], correct: "chose",
         explanation: "'Chose' es el pasado simple del verbo irregular 'choose'. Se usa aquí porque la acción concluyó en un periodo de tiempo definido."
       },
       {
-        id: 2,
-        verb: "conclude",
-        type: "regular-pronunciation",
+        id: 2, verb: "conclude", type: "regular-pronunciation",
         sentence: "Identify the word where the '-ed' ending is pronounced as a distinct syllable /ɪd/:",
-        options: ["Analyzed", "Developed", "Concluded", "Maintained"],
-        correct: "Concluded",
+        options: ["Analyzed", "Developed", "Concluded", "Maintained"], correct: "Concluded",
         explanation: "Los verbos regulares que terminan con sonido /t/ o /d/ (como conclude) añaden la sílaba completa /ɪd/."
       },
       {
-        id: 3,
-        verb: "undergo",
-        type: "irregular",
+        id: 3, verb: "undergo", type: "irregular",
         sentence: "The academic board has _________ structural changes to the graduation curriculum requirements.",
-        options: ["undergone", "underwent", "undergo", "undergoneed"],
-        correct: "undergone",
-        explanation: "Después del auxiliar 'has' (Presente Perfecto), requerimos el participio pasado del verbo. El participio de 'undergo' es 'undergone'."
+        options: ["undergone", "underwent", "undergo", "undergoneed"], correct: "undergone",
+        explanation: "Después del auxiliar 'has' (Presente Perfecto), requerimos el participio pasado del verbo."
       },
       {
-        id: 4,
-        verb: "acknowledge",
-        type: "academic-regular",
+        id: 4, verb: "acknowledge", type: "academic-regular",
         sentence: "Before publishing the thesis, the supervisor requested that the students _________ their sources properly.",
-        options: ["contradicted", "acknowledged", "arisen", "overcame"],
-        correct: "acknowledged",
-        explanation: "'Acknowledged' significa reconocer o dar crédito a las fuentes, adecuado para el contexto formal de una tesis."
+        options: ["contradicted", "acknowledged", "arisen", "overcame"], correct: "acknowledged",
+        explanation: "'Acknowledged' significa reconocer o dar crédito a las fuentes de investigación de forma formal."
       },
       {
-        id: 5,
-        verb: "become",
-        type: "irregular",
+        id: 5, verb: "become", type: "irregular",
         sentence: "Critical thinking skills have _________ essential for passing modern university language evaluations.",
+        options: ["became", "become", "becoming", "becomes"], correct: "become",
+        explanation: "El participio pasado del verbo irregular 'become' vuelve a ser 'become' (become - became - become)."
+      }
+    ];
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUserUID = user.uid;
+        loadQuestion();
+      } else {
+        currentUserUID = null;
+        document.getElementById("question-box").innerHTML = `
+          <div class="ex" style="border-left-color: #c0392b;">
+            <strong>Acceso denegado:</strong> Por favor, inicia sesión para registrar tus respuestas en la base de datos.
+          </div>
+        `;
+      }
+    });
+
+    window.loadQuestion = function() {
+      if (!currentUserUID) return;
+      const question = verbQuestions[currentQuestionIndex];
+      selectedAnswer = null; isVerified = false;
+      const actionBtn = document.getElementById("quiz-action-btn");
+      actionBtn.innerText = "Verificar"; actionBtn.disabled = true;
+      document.getElementById("quiz-step-text").innerText = `Pregunta ${currentQuestionIndex + 1} de ${verbQuestions.length}`;
+      const questionBox = document.getElementById("question-box");
+      questionBox.className = "q"; 
+      
+      let optionsHTML = question.options.map((option, idx) => `
+        <label class="card o" style="cursor:pointer;" id="opt-container-${idx}">
+          <input type="radio" name="verb-opt" value="${option}" onclick="selectOption('${option}', ${idx})">
+          <span>${option}</span>
+        </label>
+      `).join("");
+
+      questionBox.innerHTML = `
+        <span class="tag">${question.type.toUpperCase()}</span>
+        <p style="margin-top: 10px; font-size: 1.15rem;">${question.sentence}</p>
+        <div style="margin-top: 14px;">${optionsHTML}</div>
+        <div id="explanation-box" class="ex" style="display:none; margin-top:14px;"></div>
+      `;
+    }
+
+    window.selectOption = function(optionValue, index) {
+      if (isVerified) return;
+      selectedAnswer = optionValue;
+      document.getElementById("quiz-action-btn").disabled = false;
+      verbQuestions[currentQuestionIndex].options.forEach((_, idx) => {
+        const container = document.getElementById(`opt-container-${idx}`);
+        container.style.border = "1px solid var(--line)";
+        container.style.background = "var(--card)";
+      });
+      const selectedContainer = document.getElementById(`opt-container-${index}`);
+      selectedContainer.style.border = "2px solid var(--acc)";
+      selectedContainer.style.background = "color-mix(in srgb, var(--acc) 8%, transparent)";
+    }
+
+    window.handleNextStep = function() {
+      const question = verbQuestions[currentQuestionIndex];
+      const actionBtn = document.getElementById("quiz-action-btn");
+
+      if (!isVerified) {
+        isVerified = true;
+        const isCorrect = (selectedAnswer === question.correct);
+        const questionBox = document.getElementById("question-box");
+
+        if (isCorrect) {
+          correctAnswersCount++; verbsLearned.push(question.verb);
+          questionBox.classList.add("ok");
+        } else {
+          verbsFailed.push(question.verb);
+          questionBox.classList.add("bad");
+        }
+
+        question.options.forEach((option, idx) => {
+          const container = document.getElementById(`opt-container-${idx}`);
+          if (option === question.correct) {
+            container.className = "card o right"; container.style.border = "1px solid var(--ok)";
+          } else if (option === selectedAnswer) {
+            container.className = "card o wrong"; container.style.border = "1px solid #c0392b";
+          }
+        });
+
+        document.getElementById("explanation-box").style.display = "block";
+        document.getElementById("explanation-box").innerHTML = `<strong>${isCorrect ? '¡Excelente!' : 'Incorrecto'}:</strong> ${question.explanation}`;
+        document.getElementById("quiz-score-text").innerText = `Puntuación: ${Math.round((correctAnswersCount / verbQuestions.length) * 100)}%`;
+        document.getElementById("quiz-progress").style.width = `${((currentQuestionIndex + 1) / verbQuestions.length) * 100}%`;
+        actionBtn.innerText = currentQuestionIndex === verbQuestions.length - 1 ? "Finalizar y Guardar" : "Siguiente Pregunta";
+      } else {
+        if (currentQuestionIndex < verbQuestions.length - 1) {
+          currentQuestionIndex++; loadQuestion();
+        } else {
+          saveResultsToFirestore();
+        }
+      }
+    }
+
+    async function saveResultsToFirestore() {
+      if (!currentUserUID) return;
+      const quizContainer = document.getElementById("quiz-container");
+      quizContainer.innerHTML = `<div style="text-align:center; padding: 40px 0;"><p class="mm">Guardando tu progreso en Firestore de forma segura...</p></div>`;
+      try {
+        const finalScore = Math.round((correctAnswersCount / verbQuestions.length) * 100);
+        const studentDocRef = doc(db, "students", currentUserUID);
+        await updateDoc(studentDocRef, {
+          done: arrayUnion(...verbsLearned), wrong: arrayUnion(...verbsFailed),
+          stats: { lastTestScore: finalScore, totalQuestionsAnswered: verbQuestions.length, correctAnswers: correctAnswersCount },
+          updatedAt: serverTimestamp()
+        });
+        renderFinalResults(finalScore);
+      } catch (error) {
+        console.error("Error al guardar:", error);
+        quizContainer.innerHTML = `<div class="ex" style="border-left-color: #c0392b; padding: 20px;"><strong>Error de almacenamiento:</strong> No se pudo sincronizar el progreso.<p class="mut">${error.message}</p></div>`;
+      }
+    }
+
+    function renderFinalResults(finalScore) {
+      const quizContainer = document.getElementById("quiz-container");
+      quizContainer.innerHTML = `
+        <div class="hero" style="padding: 32px 16px;">
+          <span style="font-size: 3rem;">☁️</span>
+          <h2 style="margin-top: 10px;">¡Progreso Guardado!</h2>
+          <div style="font-size: 2.5rem; font-weight: 800; color: var(--ok); margin: 15px 0;">${finalScore}%</div>
+          <p class="mm">Tus resultados han sido adjuntados a tu ficha de estudiante con éxito.</p>
+          <button class="big alt" onclick="window.location.reload()" style="margin-top:12px;">Volver a Empezar</button>
+        </div>`;
+    }
+  </script>
+</body>
+</html>
